@@ -1,0 +1,15 @@
+version: "3"
+services:
+    tutorial:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        ports:
+            - 80:80
+            - 6001:6001
+            - 8000:8000
+        volumes:
+            - ./frontend:/app/frontend
+            - ./backend:/app/backend
+        restart: unless-stopped
+        container_name: tutorial-compose

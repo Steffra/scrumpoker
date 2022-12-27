@@ -1,0 +1,75 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "beyondcode/laravel-websockets": "^1.13",
+        "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/framework": "^8.40",
+        "laravel/tinker": "^2.5",
+        "pusher/pusher-php-server": "7.0.2"
+    },
+    "require-dev": {
+        "brainmaestro/composer-git-hooks": "^2.8",
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/sail": "^1.0.1",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3.3",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "lint": "./vendor/bin/phpcs -d memory_limit=2048M --extensions=php,inc --standard=../pipelines/config/PSR12_udemx.xml .",
+        "lint:fix": "./vendor/bin/phpcbf -d memory_limit=2048M --extensions=php,inc --standard=../pipelines/config/PSR12_udemx.xml .",
+        "cghooks": "vendor/bin/cghooks",
+        "post-install-cmd": "[ $COMPOSER_DEV_MODE -eq 0 ] || cghooks add --no-lock",
+        "post-update-cmd": "[ $COMPOSER_DEV_MODE -eq 0 ] || cghooks update"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        },
+        "hooks": {
+            "pre-commit": [
+                "echo Committing as $(git config user.name)",
+                "sh backend/.git-hooks/pre-commit.sh",
+                ". \"$(dirname \"$0\")/husky.sh\""
+              ]
+          }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

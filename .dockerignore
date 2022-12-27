@@ -1,0 +1,4 @@
+backend/vendor
+frontend/dist
+frontend/cypress
+frontend/node_modules

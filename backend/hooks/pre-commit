@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo Committing as $(git config user.name)
+sh backend/.git-hooks/pre-commit.sh
+. "$(dirname "$0")/husky.sh"
